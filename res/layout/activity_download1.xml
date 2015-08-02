@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"  
+    android:orientation="vertical"  
+    android:layout_width="fill_parent"  
+    android:layout_height="fill_parent">  
+
+        
+    <LinearLayout
+        android:orientation="horizontal" 
+        android:layout_width="fill_parent"
+        android:layout_height="50dip">  
+           
+    <Button
+        android:id="@+id/apkName" 
+        android:layout_weight="1"
+        android:layout_width="fill_parent" 
+        android:layout_height="50dip"
+        android:gravity="left"
+        style="?android:attr/borderlessButtonStyle"
+        android:text="APK_NAME"/>  
+          
+    <Button
+        android:id="@+id/down_install" 
+        android:layout_weight="4"
+        android:layout_width="fill_parent" 
+        android:layout_height="50dip"
+        android:text="下载" />
+    </LinearLayout>
+    
+    <TextView
+        android:id="@+id/updateTime"
+        android:layout_marginLeft="10dip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="更新日期：2014-05-05"/>
+
+</LinearLayout>
