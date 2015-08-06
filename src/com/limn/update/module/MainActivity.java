@@ -18,8 +18,8 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.limn.update.common.RequstClient;
 import com.limn.update.config.StaticHttp;
-import com.limn.update.listener.ClickFolderListener;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.umeng.update.UmengUpdateAgent;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,7 +30,6 @@ import android.text.format.DateUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -43,15 +42,21 @@ public class MainActivity extends Activity {
 	private PullToRefreshListView listView = null;
 	private ListView refreshableView = null;
 	private MainAdapter mainAdapter = null;
+	private Button checkUpdate = null;
+	private Button refushUpdate = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		setTitle("主页");
-		
 		setContentView(R.layout.activity_main);
 
+		
+		UmengUpdateAgent.setUpdateOnlyWifi(false);
+		UmengUpdateAgent.update(this);
+		
+		checkUpdate = new Button(MainActivity.this);
+		refushUpdate = new Button(MainActivity.this);
 		//创建第三方的listView
 		listView = (PullToRefreshListView) findViewById(R.id.listView);
 		refreshableView = listView.getRefreshableView();
@@ -73,13 +78,10 @@ public class MainActivity extends Activity {
 								| DateUtils.FORMAT_ABBREV_ALL);
 				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 				requestType();
-				
 			}
 		});
-		
 		//请求
 		requestType();
-
 	}
 
 	private void requestType() {
@@ -90,6 +92,8 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+				
+				
 				try {
 					String res = new String(arg2, "UTF-8");
 
@@ -119,13 +123,8 @@ public class MainActivity extends Activity {
 					});
 				} catch (UnsupportedEncodingException e) {
 					Toast.makeText(MainActivity.this, "数据解析错误", Toast.LENGTH_SHORT).show();
-					mianView.setOnClickListener(new OnClickListener() {
-						
-						@Override
-						public void onClick(View arg0) {
-							requestType();
-						}
-					});
+					
+					failure();
 				}
 				mDialog.cancel();
 				listView.onRefreshComplete();
@@ -134,17 +133,46 @@ public class MainActivity extends Activity {
 			@Override
 			public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
 				Toast.makeText(MainActivity.this, "请求异常", Toast.LENGTH_SHORT).show();
-				mianView.setOnClickListener(new OnClickListener() {
-					
-					@Override
-					public void onClick(View arg0) {
-						requestType();
-					}
-				});
-				mDialog.cancel();
-				listView.onRefreshComplete();
+				
+				failure();
 			}
 		});
+	}
+	
+	
+	private void failure(){
+		
+		
+//		refushUpdate.setText("刷新");
+//		refushUpdate.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View arg0) {
+//				requestType();
+//			}
+//		});
+//
+//		
+//		
+//		checkUpdate.setText("检查更新");
+//		checkUpdate.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View arg0) {
+//				UmengUpdateAgent.update(MainActivity.this);
+//			}
+//		});
+//		
+//		mianView.addView(checkUpdate);
+//		mianView.addView(refushUpdate);
+		
+		UmengUpdateAgent.update(this);
+		
+		mainAdapter.setList(null, mDialog);
+		mainAdapter.notifyDataSetChanged();
+		
+		mDialog.cancel();
+		listView.onRefreshComplete();
 	}
 
 	private Dialog mDialog;

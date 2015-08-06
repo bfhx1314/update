@@ -53,9 +53,9 @@ public final class R {
 		public static final int both = 0x7f050003;
 		public static final int disabled = 0x7f050000;
 		public static final int diy = 0x7f050009;
-		public static final int endlessListview_feater_content = 0x7f05001b;
-		public static final int endlessListview_progressBar = 0x7f05001d;
-		public static final int endlessListview_text = 0x7f05001c;
+		public static final int endlessListview_feater_content = 0x7f050030;
+		public static final int endlessListview_progressBar = 0x7f050032;
+		public static final int endlessListview_text = 0x7f050031;
 		public static final int fl_inner = 0x7f050016;
 		public static final int flip = 0x7f050008;
 		public static final int gridview = 0x7f05000a;
@@ -75,7 +75,7 @@ public final class R {
 	public static final class layout {
 		public static final int pull_to_refresh_header_horizontal = 0x7f030004;
 		public static final int pull_to_refresh_header_vertical = 0x7f030005;
-		public static final int view_endless_listview_footer = 0x7f030006;
+		public static final int view_endless_listview_footer = 0x7f03000a;
 	}
 	public static final class string {
 		public static final int pull_to_refresh_from_bottom_pull_label = 0x7f070003;
