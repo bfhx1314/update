@@ -11,7 +11,7 @@ public class RequstClient {
 	private static AsyncHttpClient mClient = new AsyncHttpClient();
 
 	static {
-		mClient.setTimeout(20000);
+		mClient.setTimeout(10000);
 	}
 
 	public static String post(String url, RequestParams params) {

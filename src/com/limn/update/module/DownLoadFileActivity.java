@@ -9,28 +9,26 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-
-import com.example.update.R;
-import com.limn.update.MainActivity;
-import com.limn.update.common.RequstClient;
-import com.limn.update.config.StaticHttp;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.DialogInterface.OnKeyListener;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.LinearLayout;
+import android.text.format.DateUtils;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.update.R;
+import com.handmark.pulltorefresh.library.EndlessListview;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshEndlessListView;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.limn.update.common.RequstClient;
+import com.limn.update.config.StaticHttp;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 /**
  * 下载APK界面
@@ -43,8 +41,8 @@ public class DownLoadFileActivity extends Activity {
 	//定义Person
 	private DownLoadFileAdapter adapter = null;
 	private String type = null;
-	private ListView listView = null;
-	
+	private PullToRefreshListView listView = null;
+	private ListView refreshableView = null;
 	private RequestParams params = new RequestParams();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +57,25 @@ public class DownLoadFileActivity extends Activity {
 		
 		setTitle("主页/" + type);
 		
-		listView = (ListView) findViewById(R.id.listView01);
+		listView = (PullToRefreshListView) findViewById(R.id.pull_guest_list);
+		
+		refreshableView = listView.getRefreshableView();
+		
+		listView.setOnRefreshListener(new OnRefreshListener<ListView>() {
+
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+				String label = DateUtils.formatDateTime(DownLoadFileActivity.this,
+						System.currentTimeMillis(), DateUtils.FORMAT_SHOW_TIME
+								| DateUtils.FORMAT_SHOW_DATE
+								| DateUtils.FORMAT_ABBREV_ALL);
+				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+				request();
+				
+			}
+		});
 		adapter = new DownLoadFileAdapter(this);
-		listView.setAdapter(adapter);
+		refreshableView.setAdapter(adapter);
 		request();
 	}
 
@@ -115,20 +129,25 @@ public class DownLoadFileActivity extends Activity {
 
 					}
 					
-					adapter.setDownLoadFileList(listBean);
+					adapter.setDownLoadFileList(listBean,mDialog);
 					adapter.notifyDataSetChanged();
 				} catch (JSONException e) {
 					Toast.makeText(DownLoadFileActivity.this, "无数据", Toast.LENGTH_SHORT).show();
 				} catch (UnsupportedEncodingException e) {
 					Toast.makeText(DownLoadFileActivity.this, "数据解析错误", Toast.LENGTH_SHORT).show();
 				}
-				mDialog.cancel();
+				
+				if(mDialog.isShowing()){
+					mDialog.cancel();
+				}
+				listView.onRefreshComplete();
 			}
 
 			@Override
 			public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
 				Toast.makeText(DownLoadFileActivity.this, "请求异常", Toast.LENGTH_SHORT).show();
 				mDialog.cancel();
+				listView.onRefreshComplete();
 			}
 		});
 		

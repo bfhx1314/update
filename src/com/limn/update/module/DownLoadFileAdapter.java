@@ -11,6 +11,7 @@ import com.limn.update.config.StaticHttp;
 import com.limn.update.listener.ClickFileListener;
 import com.limn.update.listener.ClickFolderListener;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +23,15 @@ import android.widget.TextView;
 public class DownLoadFileAdapter extends BaseAdapter {
 	public ArrayList<DownLoadFileBean> downLoadFileBean = new ArrayList<DownLoadFileBean>();
 	Context mContext;
+	private Dialog mdialog;
 	
 	public DownLoadFileAdapter(Context context){
 		this.mContext = context;
 	}
 
-	public void setDownLoadFileList(ArrayList<DownLoadFileBean> person){
+	public void setDownLoadFileList(ArrayList<DownLoadFileBean> person, Dialog mdialog){
 		downLoadFileBean = person;
+		this.mdialog = mdialog;
 	}
 	
 	
@@ -120,6 +123,10 @@ public class DownLoadFileAdapter extends BaseAdapter {
 			// 给按钮添加监听事件
 			viewHolder.down_install.setOnClickListener(new ClickFileListener(dow.getPath()+ "/" + apkName,mContext));
 
+		}
+		
+		if(getCount() == position + 1){
+			mdialog.cancel();
 		}
 		
 		return convertView;

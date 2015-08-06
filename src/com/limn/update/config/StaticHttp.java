@@ -3,9 +3,9 @@ package com.limn.update.config;
 public class StaticHttp {
 	
 	
-	public static String REQUEST_IP = "http://192.168.0.100:8080/update/";
+	public static String REQUEST_IP = "http://172.16.24.87:8080/update/";
 	
-	public static String DOWNLOAD_IP = "http://192.168.0.100:8080/update/apk/";
+	public static String DOWNLOAD_IP = "http://172.16.24.87:8080/update/apk/";
 	
 	
 	public static String INDEX = REQUEST_IP + "index.do";

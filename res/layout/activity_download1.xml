@@ -15,8 +15,8 @@
         android:id="@+id/apkName" 
         android:layout_weight="1"
         android:layout_width="fill_parent" 
-        android:layout_height="50dip"
-        android:gravity="left"
+        android:layout_height="fill_parent"
+        android:gravity="left|center_vertical"
         style="?android:attr/borderlessButtonStyle"
         android:text="APK_NAME"/>  
           
