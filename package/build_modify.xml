@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="modfiy">
+
+   <property name="this.version" value="${version}" />
+   <property name="this.buildNumber" value="${buildNumber}" />
+   <property name="this.versionCode" value="${versionCode}" />
+   <property name="this.versionName" value="${versionName}" />
+   <property name="this.JPUSH_APPKEY" value="${JPUSH_APPKEY}" />
+   <property name="this.UMENG_APPKEY" value="${UMENG_APPKEY}" />
+   <property name="this.sourceFile" value="${sourceFile}" />
+   <property name="this.sourceText" value="${sourceText}" />
+   <property name="this.sourceValue" value="${sourceValue}" />
+   <property name="this.buildPath" value="${buildPath}" />
+   <property name="this.deployPath" value="${deployPath}" />
+   <property name="this.environment" value="${environment}" />
+   <property name="this.sourceAndroidManifest" value="${sourceAndroidManifest}" />
+   
+   
+	<target name="modify">
+		<taskdef name="modfiyvalue" classname="com.limn.common.ModifyFileTask" classpath="../../../package/lib/modifyjava.jar"/>
+		<!-- 
+		<property name="this.sourceFile" value="F:/user/workspace/update/update/src/com/limn/update/config/StaticHttp.java"/>
+		<property name="this.sourceText" value="REQUEST_IP,DOWNLOAD_IP"/>
+		<property name="this.sourceValue" value="http://172.16.24.95:80;,http://172.16.24.95:80/apk;"/>
+		-->
+		<modfiyvalue sourceFile="${this.sourceFile}" sourceText="${this.sourceText}" sourceValue="${this.sourceValue}" umengAppKey="${this.UMENG_APPKEY}" 
+		jPushAppKey="${this.JPUSH_APPKEY}" versionCode="${this.versionCode}" versionName="${this.versionName}" sourceAndroidManifest="${this.sourceAndroidManifest}"/>
+		
+	</target>
+
+</project>
