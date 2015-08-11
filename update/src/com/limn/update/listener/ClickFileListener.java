@@ -13,12 +13,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.limn.update.config.StaticHttp;
+import com.limn.update.module.DownLoadFileActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -130,11 +132,23 @@ public class ClickFileListener implements OnClickListener {
 			URLConnection conn = null;
 			InputStream is = null;
 			FileOutputStream fos = null;
-			try {
+			
+			try{
 				conn = myURL.openConnection();
 				conn.connect();
-
 				is = conn.getInputStream();
+			}catch (IOException ex){
+				
+				Looper.prepare();
+				Toast.makeText(act, "文件不存在,请重新刷新", Toast.LENGTH_SHORT).show();
+			    Looper.loop();// 进入loop中的循环，查看消息队列
+				return;
+			}
+			
+			
+			
+			try {
+
 
 				fileSize = conn.getContentLength();// 根据响应获取文件大小
 				if (fileSize <= 0)
@@ -182,9 +196,13 @@ public class ClickFileListener implements OnClickListener {
 			} finally {
 				conn = null;
 				try {
-					fos.flush();
-					fos.close();
-					is.close();
+					if(fos!=null){
+						fos.flush();
+						fos.close();
+					}
+					if(is!=null){
+						is.close();
+					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

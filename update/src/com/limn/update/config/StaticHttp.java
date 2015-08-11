@@ -3,7 +3,7 @@ package com.limn.update.config;
 public class StaticHttp {
 	
 	//请求地址
-	public static String REQUEST_IP = "http://172.16.24.95:80";
+	public static String REQUEST_IP = "http://192.168.0.103:8080/update";
 	
 	
 	
