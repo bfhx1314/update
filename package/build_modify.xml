@@ -14,7 +14,9 @@
    <property name="this.deployPath" value="${deployPath}" />
    <property name="this.environment" value="${environment}" />
    <property name="this.sourceAndroidManifest" value="${sourceAndroidManifest}" />
-   
+   <property name="this.fileName" value="${fileName}" />
+   <property name="this.findFilePath" value="${findFilePath}" />
+
    
 	<target name="modify">
 		<taskdef name="modfiyvalue" classname="com.limn.common.ModifyFileTask" classpath="../../../package/lib/modifyjava.jar"/>
@@ -23,9 +25,14 @@
 		<property name="this.sourceText" value="REQUEST_IP,DOWNLOAD_IP"/>
 		<property name="this.sourceValue" value="http://172.16.24.95:80;,http://172.16.24.95:80/apk;"/>
 		-->
-		<modfiyvalue sourceFile="${this.sourceFile}" sourceText="${this.sourceText}" sourceValue="${this.sourceValue}" umengAppKey="${this.UMENG_APPKEY}" 
-		jPushAppKey="${this.JPUSH_APPKEY}" versionCode="${this.versionCode}" versionName="${this.versionName}" sourceAndroidManifest="${this.sourceAndroidManifest}"/>
+		<modfiyvalue  property="fileFullName" sourceFile="${this.sourceFile}" sourceText="${this.sourceText}" sourceValue="${this.sourceValue}" umengAppKey="${this.UMENG_APPKEY}" 
+		jPushAppKey="${this.JPUSH_APPKEY}" versionCode="${this.versionCode}" versionName="${this.versionName}" sourceAndroidManifest="${this.sourceAndroidManifest}"
+		findFilePath="${this.findFilePath}" fileName="${this.fileName}"/>
+		<echo message="return: fileFullName ------- ${fileFullName} ----" />
 		
+		<echo message="copy: local.properties" />
+		<copy file="" tofile=""/>
+		<copy file="" tofile=""/>
 	</target>
 
 </project>
