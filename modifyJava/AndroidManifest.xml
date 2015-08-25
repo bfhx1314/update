@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="10" android:versionName="4.0.1" package="cn.haowu.agent">
+
+    <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="19"/>
+
+    <!-- Required  一些系统要求的权限，如访问网络等 -->
+    <permission android:name="cn.haowu.agent.permission.JPUSH_MESSAGE" android:protectionLevel="signature"/>
+
+    <uses-permission android:name="cn.haowu.agent.permission.JPUSH_MESSAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <!-- Optional for location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
+
+    <application android:allowBackup="true" android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:name="cn.haowu.agent.MyApplication" android:screenOrientation="portrait" android:theme="@style/AppTheme">
+        <activity android:name="cn.haowu.agent.module.welcomeOrGuide.WelcomeActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.main.MainActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.welcomeOrGuide.GuideActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.schedule.CreateScheduleActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+        <!-- 登录，注册 -->
+        <activity android:launchMode="singleTop" android:name=".module.loginAndRegister.LoginActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name=".module.loginAndRegister.RegisterOneActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name=".module.loginAndRegister.RegisterTwoActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTask" android:name=".module.loginAndRegister.SmsRegisterActivity" android:screenOrientation="portrait">
+        </activity>
+        <!-- 忘记密码 -->
+        <activity android:launchMode="singleTop" android:name=".module.forgetPassword.FindPwdOneActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name=".module.forgetPassword.FindPwdTwoActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name=".module.forgetPassword.FindPwdThreeActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name=".module.forgetPassword.SmsFindPwdActivity" android:screenOrientation="portrait">
+        </activity>
+        <!-- 我 -->
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.me.ModifyUserInfoActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.me.ModifyNameActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.me.ModifyPwdActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.me.ModifySexActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.me.ModifyPhoneActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.me.ModifyPhoneSuccessActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.me.coupon.MyCouponActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.me.coupon.CouponActivity" android:screenOrientation="portrait">
+        </activity>
+         <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.me.coupon.CouponWebViewActivity" android:screenOrientation="portrait">
+        </activity>
+        <!-- 设置 -->
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.setting.SettingActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.setting.FeedBackActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.setting.AboutUsActivity" android:screenOrientation="portrait">
+        </activity>
+        <!-- 钱包 -->
+        <activity android:configChanges="keyboardHidden|orientation" android:launchMode="singleTop" android:name=".module.wallet.MyBankCardAddActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.MyBankCardCityListActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.MyBankCardDetailActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.MyBankCardProvinceListActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.MyBankCardTypeActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.MyBankCardActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.WalletExtractSuccessActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.WalletExtractActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.WalletMainActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.WalletParticularsActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.WithdrawCashPasswordForget1Activity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.WithdrawCashPasswordForget2Activity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.WithdrawCashPasswordForget3Activity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.WithdrawCashPasswordProvingActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.WithdrawCashPasswordSetting1Activity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.WithdrawCashPasswordSetting2Activity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.WithdrawCashPasswordSetting3Activity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.WithdrawCashPasswordUpdate1Activity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.WithdrawCashPasswordUpdate2Activity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.WithdrawCashPasswordUpdate3Activity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.wallet.WithdrawCashPasswordActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.main.schedule.CreateScheduleActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.guest.GuestListActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTask" android:name="cn.haowu.agent.module.schedule.ScheduleMainActivity">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.guest.AddCustomerActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+        <activity android:name="cn.haowu.agent.module.guest.GuestDetailActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.guest.SelectSexActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.guest.SelectSourcesActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.index.robclient.GrabGuestFragmentActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.index.robclient.GrabGuestResultActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+        <!-- 城市 -->
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.city.CooperateCityListActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.city.AllCooperateCityListActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.city.MyAllCooperateCityListActivity" android:screenOrientation="portrait">
+        </activity>
+        <!-- 报备客户 -->
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.guest.ReportGuestActivity" android:screenOrientation="portrait">
+        </activity>
+        <!-- 预约看房 -->
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.housesource.secondhandhouse.detail.SecondAppointmentHouseActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.housesource.secondhandhouse.detail.detail.SecondHandHouseDetailActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+        <!-- 选择小区 -->
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.housesource.secondhandhouse.publishAndEdit.SelectAreaActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+        <!-- 机会 -->
+        <activity android:configChanges="keyboardHidden|orientation" android:name="cn.haowu.agent.module.servise.ServiceGuestDetailActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation" android:name="cn.haowu.agent.module.servise.AddChanceActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation" android:name="cn.haowu.agent.module.servise.MyWebViewActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation" android:name="cn.haowu.agent.module.servise.SuccessAddchanceActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation" android:name="cn.haowu.agent.module.servise.ProductDetailActivity" android:screenOrientation="portrait">
+        </activity>
+        <!-- 机构管理员 -->
+        <activity android:name="cn.haowu.agent.module.organization.create.CreateOrganizationOneActivity" android:screenOrientation="portrait"/>
+        <activity android:name="cn.haowu.agent.module.organization.create.CreateOrganizationTwoActivity" android:screenOrientation="portrait"/>
+        <activity android:name="cn.haowu.agent.module.organization.create.CreateOrganizationThreeActivity" android:screenOrientation="portrait"/>
+        <activity android:name="cn.haowu.agent.module.organization.create.OrganizationDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="cn.haowu.agent.module.organization.OrganizationPageActivity" android:screenOrientation="portrait"/>
+        <activity android:name="cn.haowu.agent.module.organization.broker.AddBrokerActivity" android:screenOrientation="portrait"/>
+        <activity android:name="cn.haowu.agent.module.organization.AddStoreActivity" android:screenOrientation="portrait"/>
+        <activity android:name="cn.haowu.agent.module.organization.broker.BrokerActivity" android:screenOrientation="portrait"/>
+        <!-- 我的房店 -->
+        <activity android:name="cn.haowu.agent.module.myhouseshop.MyHouseShopFragmentActivity" android:screenOrientation="portrait"/>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.schedule.ScheduleDeailActivity">
+        </activity>
+        <activity android:name="cn.haowu.agent.module.calculation.AverageMonthlyRepaymentActivity" android:screenOrientation="portrait"/>
+        <activity android:name="cn.haowu.agent.module.calculation.CalculationResult" android:screenOrientation="portrait"/>
+        <activity android:name="cn.haowu.agent.module.calculation.ExtraConditionActivity" android:screenOrientation="portrait"/>
+        <activity android:name="cn.haowu.agent.module.calculation.MortgageCalculatorActivity" android:screenOrientation="portrait"/>
+        <activity android:name="cn.haowu.agent.module.calculation.TaxCounterActivity" android:screenOrientation="portrait"/>
+        <!-- 选择客户 -->
+        <activity android:name="cn.haowu.agent.module.guest.SelectGuestActivity" android:screenOrientation="portrait"/>
+        <activity android:launchMode="singleTop" android:name="cn.haowu.agent.module.schedule.ScheduleListActivity">
+        </activity>
+        <!-- 发布房源第一步 -->
+        <activity android:name="cn.haowu.agent.module.housesource.secondhandhouse.publishAndEdit.PublishHouseOneActivity" android:screenOrientation="portrait"/>
+        <!-- 发布房源第二步 -->
+        <activity android:name="cn.haowu.agent.module.housesource.secondhandhouse.publishAndEdit.PublishHouseTwoActivity" android:screenOrientation="portrait"/>
+        <!-- 发布房源图片详情 -->
+        <activity android:name="cn.haowu.agent.module.housesource.secondhandhouse.publishAndEdit.PulishImageDetailActivity" android:screenOrientation="portrait"/>
+        <activity android:name="cn.haowu.agent.module.myhouseshop.dynamic.DynamicDetailActivity" android:screenOrientation="portrait"/>
+        <!-- 排行榜 -->
+        <activity android:name="cn.haowu.agent.module.index.rank.RankActivity" android:screenOrientation="portrait"/>
+        <activity android:name="cn.haowu.agent.module.guest.ReportedNewHouseActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="cn.haowu.agent.module.guest.ReportedSecondaryHouseActivity" android:screenOrientation="portrait">
+        </activity>
+        <!-- 预约人次 -->
+        <activity android:name="cn.haowu.agent.module.housesource.secondhandhouse.detail.AppointNumActivity" android:screenOrientation="portrait"/>
+        <!-- 成交确认 -->
+        <activity android:name="cn.haowu.agent.module.housesource.secondhandhouse.detail.DealConfirmationActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".module.me.MeInfoActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.me.PerformanceActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.me.IntegralActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.me.calendarsign.SignTimeActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="cn.haowu.agent.module.index.mydownline.MyDownLineActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="cn.haowu.agent.module.index.mydownline.AddInsertingCoil" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="cn.haowu.agent.module.index.mydownline.InviteFriendActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="cn.haowu.agent.module.index.mydownline.DownLineDetailActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.me.ScanningActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.me.fg.MarkerActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.message.list.MessageListActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.message.list.MessageDetailActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="cn.haowu.agent.module.guest.MassTextMessageActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="cn.haowu.agent.module.schedule.RelevanceHouseActivity" android:screenOrientation="portrait"/>
+        <activity android:name="cn.haowu.agent.module.housesource.secondhandhouse.detail.SecondHouseDetailPhotoViewActivity" android:screenOrientation="portrait"/>
+        <activity android:name="cn.haowu.agent.module.organization.map.MarkerActivity" android:screenOrientation="portrait"/>
+        <activity android:name="cn.haowu.agent.module.housesource.newhouse.detail.NewHouseDetailActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="cn.haowu.agent.module.housesource.newhouse.detail.NewHouseDetailPhotoViewActivity" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="cn.haowu.agent.module.guest.ReportGuesHadtActivity" android:screenOrientation="portrait">
+        </activity>
+        
+        <activity android:name="cn.haowu.agent.module.redbag.ShaveAwardActivity" android:screenOrientation="portrait">
+        </activity>
+        
+        <activity android:name="cn.haowu.agent.module.redbag.MyRedActivity" android:screenOrientation="portrait">
+        </activity>
+        
+        <activity android:name="cn.haowu.agent.module.redbag.ShareSuccessActivity" android:screenOrientation="portrait">
+        </activity>
+
+        <!-- 高德地图 -->
+        <meta-data android:name="com.amap.api.v2.apikey" android:value="ef866a22a24280d69b6a2de6b556117a"/>
+
+        <activity android:name="cn.haowu.agent.module.organization.map.GaodeMapActivity" android:screenOrientation="portrait">
+        </activity>
+
+        <!-- umeng ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
+        <!-- 测试key 5514f845fd98c56c4a0008db -->
+        <!-- 正式key 538bed3b56240ba94311a324 -->
+        <meta-data android:name="UMENG_APPKEY" android:value="yyyyy">
+        </meta-data>
+        <!-- umeng渠道名 -->
+        <meta-data android:name="UMENG_CHANNEL" android:value="haowu">
+        </meta-data>
+        <!-- umeng分享 -->
+        <!-- ############ 分享编辑页  ############ -->
+        <activity android:configChanges="orientation|keyboard" android:launchMode="singleTask" android:name="com.umeng.socialize.view.ShareActivity" android:noHistory="true" android:screenOrientation="portrait" android:theme="@style/Theme.UMDialog" android:windowSoftInputMode="stateVisible|adjustResize">
+        </activity>
+        <!-- ############ QQ空间和QQ SSO授权的Activity注册 ############ -->
+        <activity android:launchMode="singleTask" android:name="com.tencent.tauth.AuthActivity" android:noHistory="true" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <!--
+                100424468，如果你使用的公用账号，则不需要修改；否则修改成你在QQ开放平台申请的 APP ID 
+                                                      正式：tencent
+                                                      测试：tencent1103755672
+                -->
+                <data android:scheme="tencent1103755672"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.tencent.connect.common.AssistActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+        <!-- ############ 微信分享回调activity ############ -->
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="true" android:name="cn.haowu.agent.wxapi.WXEntryActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <!-- umeng更新 -->
+        <activity android:name="com.umeng.update.UpdateDialogActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar">
+        </activity>
+
+        <service android:name="com.umeng.update.net.DownloadingService" android:process=":DownloadingService">
+        </service>
+        <!-- umeng反馈 -->
+        <activity android:name="com.umeng.fb.ConversationActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:name="com.umeng.fb.ContactActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.NoTitleBar"/>
+        <!-- umeng统计 -->
+        <activity android:name=".analytics.WebviewAnalytic">
+        </activity>
+        <activity android:name=".analytics.FragmentStack">
+        </activity>
+        <activity android:name=".analytics.FragmentTabs">
+        </activity>
+        <!-- umeng ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
+        <!-- Jpush ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
+        <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
+
+        <!-- 正式 7a00f8b8734b49c71449612a
+        		 143ce4f7df25d5504ca1bb5f  
+         -->
+        <meta-data android:name="JPUSH_APPKEY" android:value="xxxxx"/>
+
+        <activity android:configChanges="orientation|keyboardHidden" android:name="cn.jpush.android.ui.PushActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="cn.jpush.android.ui.PushActivity"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="cn.haowu.agent"/>
+            </intent-filter>
+        </activity>
+
+        <service android:enabled="true" android:exported="false" android:name="cn.jpush.android.service.DownloadService">
+        </service>
+        <service android:enabled="true" android:exported="false" android:name="cn.jpush.android.service.PushService">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTER"/>
+                <action android:name="cn.jpush.android.intent.REPORT"/>
+                <action android:name="cn.jpush.android.intent.PushService"/>
+                <action android:name="cn.jpush.android.intent.PUSH_TIME"/>
+            </intent-filter>
+        </service>
+
+        <receiver android:enabled="true" android:name="cn.jpush.android.service.PushReceiver">
+            <intent-filter android:priority="1000">
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY"/> <!-- Required  显示通知栏 -->
+                <category android:name="cn.haowu.agent"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+            <!-- Optional -->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+
+                <data android:scheme="package"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="cn.jpush.android.service.AlarmReceiver"/>
+
+        <!-- User defined.  For test only  用户自定义的广播接收器 -->
+        <receiver android:enabled="true" android:name="cn.haowu.agent.usage.jpush.JpushReceiver">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION"/> <!-- Required  用户注册SDK的intent -->
+                <action android:name="cn.jpush.android.intent.UNREGISTRATION"/>
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED"/> <!-- Required  用户接收SDK消息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED"/> <!-- Required  用户接收SDK通知栏信息的intent -->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED"/> <!-- Required  用户打开自定义通知栏的intent -->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK"/> <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
+                <action android:name="cn.jpush.android.intent.CONNECTION"/> <!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="cn.haowu.agent"/>
+            </intent-filter>
+        </receiver>
+        <!-- Jpush ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
+    </application>
+
+</manifest>
